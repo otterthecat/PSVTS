@@ -1,0 +1,22 @@
+{
+  "name": "ProjectSuperVeryTightlippedSecret",
+  "title": "Project Super Very Tightlipped Secret",
+  "description": "Taking a stab at a web based IDE",
+  "version": "0.0.1",
+  "homepage": "https://github.com/otterthecat/PSVTS.git",
+  "author": {
+    "name": "Otter the Cat",
+    "email": "otc@otterthecat.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/otterthecat/PSVTS.git"
+  },
+  "dependencies": {
+    "socket.io": "0.9.13",
+    "mongoose": "3.6.15",
+    "mocha": "*",
+    "chai": "*"
+  },
+  "keywords": ["Project Super Very Tightlipped Secret"]
+}
