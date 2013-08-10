@@ -13,6 +13,7 @@
     "url": "https://github.com/otterthecat/PSVTS.git"
   },
   "dependencies": {
+    "codemirror": "3.15.0",
     "socket.io": "0.9.13",
     "mongoose": "3.6.15",
     "mocha": "*",
