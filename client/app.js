@@ -17,3 +17,9 @@ socket.on('edit_file', function(data){
 
     Editor.create('#codeMirror', data);
 });
+
+socket.on('update_files', function(data){
+
+	var iframe = document.querySelector('iframe');
+	iframe.contentWindow.location.reload();
+});

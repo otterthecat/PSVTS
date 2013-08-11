@@ -1,8 +1,9 @@
-(function(EditorFramework){
+(function(EditorFramework, SocketObject){
 
 
-    var Editor = function(framework){
+    var Editor = function(framework, socket){
 
+        this.socket = socket;
         this.framework = framework;
     };
 
@@ -11,6 +12,7 @@
 
         create: function(targetEl, params){
 
+            var socket = this.socket;
             var targetElement = document.querySelector(targetEl);
             var content = params.content;
             var the_file = params.file;
@@ -19,13 +21,13 @@
                 theme: 'twilight',
                 value: content,
                 lineNumbers: true,
-                extraKeys: {
+                extraKeys: { // this should really be extracted into an inserted object...
                     'Ctrl-S': function(cm){
 
-                        // socket.emit('save_document',{
-                        //     'path': 'files/' + the_file,
-                        //     'content': cm.doc.getValue()
-                        // })
+                        socket.emit('save_document',{
+                            'path': 'projects/' + the_file,
+                            'content': cm.doc.getValue()
+                        })
                     }
                 },
                 mode: params.mode
@@ -38,5 +40,5 @@
     };
 
 
-    window.Editor = new Editor(EditorFramework);
-})(CodeMirror);
+    window.Editor = new Editor(EditorFramework, SocketObject);
+})(CodeMirror, socket);
