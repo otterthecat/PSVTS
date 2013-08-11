@@ -65,6 +65,28 @@
 
         generateDisplay: function(data){
 
+            var ul = document.querySelector('ul#fileList');
+            var socket = this.socket;
+
+            ul.onclick = function(event){
+
+                var selection = event.target;
+                socket.emit('getFile', {
+                    'path': 'projects',
+                    'file': selection.getAttribute('data-file')
+                });
+            }
+
+            for (key in data){
+
+                var li = document.createElement('li');
+                li.setAttribute('data-file', key);
+                li.innerHTML = key;
+
+                // this should really be done after the loop
+                // with the full list of elements (use string instead of object)
+                ul.appendChild(li);
+            }
         },
 
         listen: function(event, callback){
