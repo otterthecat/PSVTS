@@ -9,3 +9,8 @@ Panels.filesPanel.listen('return_file_data', function(data){
 
     Panels.filesPanel.generateDisplay(data.files);
 });
+
+socket.on('edit_file', function(data){
+
+    Editor.create('#codeMirror', data);
+});
