@@ -49,7 +49,16 @@
 
             this.element = element;
             this.element.addEventListener('click', function(event){
-                toggleTarget.className += 'slide';
+
+                var currentClass = toggleTarget.className;
+
+                if(currentClass.indexOf(' slide ') !== -1){
+                    event.currentTarget.innerHTML = "Preview";
+                    toggleTarget.className = currentClass.replace(' slide ', '');
+                } else {
+                    event.currentTarget.innerHTML = "Editor";
+                    toggleTarget.className += ' slide ';
+                }
             });
         }
     };
