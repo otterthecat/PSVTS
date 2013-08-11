@@ -14,40 +14,44 @@
 </head>
 <body>
 
-    <header id="appHeader">
-        <ul class="menu">
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>
-                <button>preview</button>
-            </li>
-        </ul>
-    </header>
+    <div class="app ">
 
-    <div class="app">
-        <div class="editor">
+        <header id="appHeader">
+            <ul class="menu">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>
+                    <button>preview</button>
+                </li>
+            </ul>
+        </header>
 
-            <div id="nav">
-                <h2>File Tree</h2>
-                <ul id="fileList">
-                </ul>
+        <div id="main">
+            <div class="editor">
+
+                <div id="nav">
+                    <h2>File Tree</h2>
+                    <ul id="fileList">
+                    </ul>
+                </div>
+
+                <div id="codeMirror"></div>
             </div>
 
-            <div id="codeMirror"></div>
+            <div class="preview">
+                <iframe src="projects/index.html" frameborder="0"></iframe>
+            </div>
         </div>
 
-        <div class="preview">
-            <iframe src="projects/index.html" frameborder="0"></iframe>
-        </div>
+        <footer id="appFooter">
+            <label for="console">Console:</label>
+                <input type="text" name="console"/>
+            <button>enter</button>
+        </footer>
     </div>
 
-    <footer id="appFooter">
-        <label for="console">Console:</label>
-            <input type="text" name="console"/>
-        <button>enter</button>
-    </footer>
-
+    <script src="client/socket.js"></script>
     <script src="client/Editor.js"></script>
     <script src="client/Panels.js"></script>
     <script src="client/app.js"></script>
