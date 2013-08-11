@@ -17,6 +17,10 @@
             var content = params.content;
             var the_file = params.file;
 
+            // until tabbed editing is created, just clear the old
+            // and replace with new one
+            targetElement.innerHTML = "";
+
             var cm = CodeMirror(targetElement, {
                 theme: 'twilight',
                 value: content,
