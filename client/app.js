@@ -10,6 +10,21 @@ Panels.filesPanel.listen('return_file_data', function(data){
 });
 
 
+// Terminal
+// /////////////////////////////////////
+var terminal = new Terminal();
+terminal.setInput('#console');
+terminal.addCommand('keydown', function(event, element){
+
+	console.log(event);
+	console.log(element);
+});
+
+
+
+
+
+
 // Have socket listen for event to
 // create CodeMirror instance
 /////////////////////////////////////

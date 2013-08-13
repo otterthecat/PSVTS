@@ -14,6 +14,7 @@ body {
 
 .app {
 
+    font-family: sans-serif;
     color: lighten(@base_color, 25%);
     position: absolute;
     width: 100%;
@@ -67,12 +68,25 @@ body {
             }
 
             #nav {
+
                 width: 15%;
                 height: 100%;
+                word-wrap: break-word;
                 background-color: darken(@base_color, 15%);
 
-                li {
-                    cursor: pointer;
+                h2 {
+                    margin: 0;
+                    padding: 8px;
+                }
+
+                ul {
+
+                    margin: 0;
+                    padding: 8px;
+
+                    li {
+                        cursor: pointer;
+                    }
                 }
             }
 

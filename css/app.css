@@ -9,6 +9,7 @@ body {
   min-height: 300px;
 }
 .app {
+  font-family: sans-serif;
   color: #a4a4a4;
   position: absolute;
   width: 100%;
@@ -65,9 +66,18 @@ body {
 .app #main .editor #nav {
   width: 15%;
   height: 100%;
+  word-wrap: break-word;
   background-color: #3e3e3e;
 }
-.app #main .editor #nav li {
+.app #main .editor #nav h2 {
+  margin: 0;
+  padding: 8px;
+}
+.app #main .editor #nav ul {
+  margin: 0;
+  padding: 8px;
+}
+.app #main .editor #nav ul li {
   cursor: pointer;
 }
 .app #main .editor #codeMirror {
