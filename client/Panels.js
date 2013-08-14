@@ -80,16 +80,25 @@
             ul.onclick = function(event){
 
                 var selection = event.target;
-                socket.emit('getFile', {
-                    'path': 'projects',
-                    'file': selection.getAttribute('data-file')
-                });
+
+                if(selection.getAttribute('data-is-directory') === 'true') {
+
+                    console.log("functionality to open up this directory should go here");
+                } else {
+
+                    socket.emit('getFile', {
+                        'path': 'projects',
+                        'file': selection.getAttribute('data-file')
+                    });
+                }
+
             }
 
             for (key in data){
 
                 var li = document.createElement('li');
                 li.setAttribute('data-file', key);
+                li.setAttribute('data-is-directory', data[key].type);
                 li.innerHTML = key;
 
                 // this should really be done after the loop

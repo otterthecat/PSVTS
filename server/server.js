@@ -36,7 +36,14 @@ var getMode = function(modeObj, fileName){
 
       for(var i = 0; i < fileList.length; i += 1){
 
-          details[fileList[i]] = fs.readFileSync(working_path + '/' + fileList[i], 'utf8');
+          var _file = fileList[i];
+          var is_dir = fs.statSync(working_path + '/' + _file).isDirectory();
+
+
+          details[fileList[i]] = {
+            'type': is_dir,
+            'content': is_dir ? null : fs.readFileSync(working_path + '/' + _file, 'utf8')
+          }
       }
 
         socket.emit('return_file_data', {'files': details, 'path': working_path});
