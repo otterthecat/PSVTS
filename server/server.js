@@ -18,16 +18,12 @@ var getMode = function(modeObj, fileName){
   return modes[extension];
 }
 
- fs.watch('projects/', function(){
+var loadFiles = function(directory){
 
-    socket.emit('update_files', {'updated': true});
-  });
-
-
-  socket.on('load_files', function(dir){
-
-    working_path = dir;
-
+    working_path = directory;
+    console.log("+++ WORKING PATH IS ");
+    console.log(working_path);
+    console.log("++++++++++++++++");
     fs.readdir(working_path, function(error, files){
 
       var details = {};
@@ -40,7 +36,7 @@ var getMode = function(modeObj, fileName){
           var is_dir = fs.statSync(working_path + '/' + _file).isDirectory();
 
 
-          details[fileList[i]] = {
+          details[_file] = {
             'type': is_dir,
             'content': is_dir ? null : fs.readFileSync(working_path + '/' + _file, 'utf8')
           }
@@ -49,6 +45,17 @@ var getMode = function(modeObj, fileName){
         socket.emit('return_file_data', {'files': details, 'path': working_path});
 
     });
+}
+
+ fs.watch('projects/', function(){
+
+    socket.emit('update_files', {'updated': true});
+  });
+
+
+  socket.on('load_files', function(dir){
+
+    loadFiles(dir);
   });
 
   socket.on('getFile', function(fileData){
@@ -74,5 +81,11 @@ var getMode = function(modeObj, fileName){
     stream.write(content);
 
     socket.emit('saved_doc', {saved: true});
+  });
+
+  socket.on('openDir', function(dir){
+
+    var dirPath = dir.path + "/" + dir.directory;
+    loadFiles(dirPath);
   });
 });

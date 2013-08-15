@@ -83,7 +83,10 @@
 
                 if(selection.getAttribute('data-is-directory') === 'true') {
 
-                    console.log("functionality to open up this directory should go here");
+                    socket.emit('openDir', {
+                        'path': 'projects',
+                        'directory': selection.getAttribute('data-file')
+                    })
                 } else {
 
                     socket.emit('getFile', {
