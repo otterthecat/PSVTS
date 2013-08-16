@@ -21,14 +21,11 @@ var getMode = function(modeObj, fileName){
 var loadFiles = function(directory){
 
     working_path = directory;
-    console.log("+++ WORKING PATH IS ");
-    console.log(working_path);
-    console.log("++++++++++++++++");
+
     fs.readdir(working_path, function(error, files){
 
       var details = {};
       var fileList = files;
-
 
       for(var i = 0; i < fileList.length; i += 1){
 

@@ -21,10 +21,6 @@ terminal.addCommand('keydown', function(event, element){
 });
 
 
-
-
-
-
 // Have socket listen for event to
 // create CodeMirror instance
 /////////////////////////////////////
