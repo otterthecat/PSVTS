@@ -83,13 +83,13 @@
 
                 if(selection.getAttribute('data-is-directory') === 'true') {
 
-                    socket.emit('openDir', {
+                    socket.emit('open_dir', {
                         'path': 'projects',
                         'directory': selection.getAttribute('data-file')
                     })
                 } else {
 
-                    socket.emit('getFile', {
+                    socket.emit('get_file', {
                         'path': 'projects',
                         'file': selection.getAttribute('data-file')
                     });

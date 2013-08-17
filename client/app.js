@@ -16,8 +16,8 @@ var terminal = new Terminal();
 terminal.setInput('#console');
 terminal.addCommand('keydown', function(event, element){
 
-	console.log(event);
-	console.log(element);
+    console.log(event);
+    console.log(element);
 });
 
 
@@ -31,6 +31,6 @@ socket.on('edit_file', function(data){
 
 socket.on('update_files', function(data){
 
-	var iframe = document.querySelector('iframe');
-	iframe.contentWindow.location.reload();
+    var iframe = document.querySelector('iframe');
+    iframe.contentWindow.location.reload();
 });

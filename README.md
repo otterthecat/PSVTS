@@ -6,9 +6,8 @@ Taking a shot at a web based IDE
 Getting Started
 ---------------
 
-Move to inside the app directory and enter
+Move to inside the PSVTS directory and start the node socket io server
 
-	node server/server.js
+	node server/app.js
 
-This will launch the socket.io server
 Then, in a browser navigate to the location of the app's index.html file, and you're good to go.
