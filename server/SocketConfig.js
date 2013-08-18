@@ -31,10 +31,10 @@ var socketConfig = {
 
                 if(params.openDirectory) {
 
-                    _this.socket.emit('return_dir_content', {'files': details, 'path': working_path});
+                    _this.emit('return_dir_content', {'files': details, 'path': working_path});
                 } else {
 
-                    _this.socket.emit('return_file_data', {'files': details, 'path': working_path});
+                    _this.emit('return_file_data', {'files': details, 'path': working_path});
                 }
 
             });
@@ -70,7 +70,7 @@ var socketConfig = {
             var stream = this.deps.fs.createWriteStream(document.path, {'flags': 'w'});
             stream.write(content);
 
-            this.socket.emit('saved_doc', {saved: true});
+            this.emit('saved_doc', {saved: true});
         },
 
         'get_file': function(fileData){
@@ -79,7 +79,7 @@ var socketConfig = {
             var _this = this;
             _this.deps.fs.readFile(fileData.path + '/' + the_file, 'utf8', function(e, d){
 
-                _this.socket.emit('edit_file', {
+                _this.emit('edit_file', {
                   'file': the_file,
                   'path': fileData.path,
                   'mode': _this.utils.getMode.call(_this, the_file),
