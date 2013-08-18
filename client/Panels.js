@@ -65,7 +65,33 @@
 
     FilesPanel.prototype = {
 
+        emitSelection: function(selection){
+
+             if(selection.getAttribute('data-is-directory') === 'true') {
+
+                this.emitDirectoryRequest(selection);
+             } else {
+
+                this.emitFileRequest(selection);
+             }
+        },
+
+        emitFileRequest: function(selection){
+
+            this.socket.emit('get_file', {
+                'file': selection.getAttribute('data-file')
+            });
+        },
+
+        emitDirectoryRequest: function(selection){
+
+            this.socket.emit('open_dir', {
+                'directory': selection.getAttribute('data-file')
+            });
+        },
+
         setDisplay: function(element, socket){
+
             this.socket = socket;
             this.files = element;
 
@@ -80,21 +106,8 @@
             ul.onclick = function(event){
 
                 selection = event.target;
-
-                if(selection.getAttribute('data-is-directory') === 'true') {
-
-                    socket.emit('open_dir', {
-                        'path': 'projects',
-                        'directory': selection.getAttribute('data-file')
-                    });
-                } else {
-
-                    socket.emit('get_file', {
-                        'path': 'projects',
-                        'file': selection.getAttribute('data-file')
-                    });
-                }
-            }
+                this.emitSelection(selection);
+            }.bind(this);
 
 
             // // TODO - move this out of here  - it works, but should be better abstracted
@@ -105,8 +118,7 @@
                 for(key in data.files){
 
                     var li = document.createElement('li');
-                    // TODO - the following line is probably unnecessary now
-                    // since path & file are now combined
+
                     li.setAttribute('data-file', data.path + '/' + key);
                     li.setAttribute('data-is-directory', data.files[key].type);
                     li.innerHTML = key;
