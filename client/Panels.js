@@ -76,17 +76,17 @@
 
             var ul = document.querySelector('ul#fileList');
             var socket = this.socket;
-
+            var selection;
             ul.onclick = function(event){
 
-                var selection = event.target;
+                selection = event.target;
 
                 if(selection.getAttribute('data-is-directory') === 'true') {
 
                     socket.emit('open_dir', {
                         'path': 'projects',
                         'directory': selection.getAttribute('data-file')
-                    })
+                    });
                 } else {
 
                     socket.emit('get_file', {
@@ -94,8 +94,24 @@
                         'file': selection.getAttribute('data-file')
                     });
                 }
-
             }
+
+
+            // // TODO - move this out of here  - it works, but should be better abstracted
+            this.socket.on('return_dir_content', function(data){
+
+                var ul = document.createElement('ul');
+                selection.appendChild(ul);
+                for(key in data){
+
+                    var li = document.createElement('li');
+                    li.setAttribute('data-file', key);
+                    li.setAttribute('data-is-directory', data[key].type);
+                    li.innerHTML = key;
+
+                    ul.appendChild(li);
+                }
+            });
 
             for (key in data){
 

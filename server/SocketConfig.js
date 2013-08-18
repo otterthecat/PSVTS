@@ -6,12 +6,13 @@ var socketConfig = {
     // functions that can be shared across listener callbacks
     utils: {
 
-        'loadFiles': function(directory){
+        'loadFiles': function(params){
 
             var _this = this;
-            var working_path = directory;
+            var working_path = params.directory;
             var fs = this.deps.fs;
 
+            // TODO - make this fully asyncrhonous!
             fs.readdir(working_path, function(error, files){
 
                 var details = {};
@@ -28,7 +29,13 @@ var socketConfig = {
                     }
                 }
 
-                _this.socket.emit('return_file_data', {'files': details, 'path': working_path});
+                if(params.openDirectory) {
+
+                    _this.socket.emit('return_dir_content', {'files': details, 'path': working_path});
+                } else {
+
+                    _this.socket.emit('return_file_data', {'files': details, 'path': working_path});
+                }
 
             });
         },
@@ -53,7 +60,7 @@ var socketConfig = {
         'open_dir': function(dir){
 
           var dirPath = dir.path + "/" + dir.directory;
-          this.utils.loadFiles.call(this, dirPath);
+          this.utils.loadFiles.call(this, {'directory': dirPath, 'openDirectory': true});
         },
 
         'save_document': function(document){
@@ -83,7 +90,7 @@ var socketConfig = {
 
         'load_files': function(directory){
 
-            this.utils.loadFiles.call(this, directory);
+            this.utils.loadFiles.call(this, {'directory': directory});
         }
     }
 }
