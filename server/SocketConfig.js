@@ -59,7 +59,7 @@ var socketConfig = {
 
         'open_dir': function(dir){
 
-          var dirPath = dir.path + "/" + dir.directory;
+          var dirPath = dir.directory;
           this.utils.loadFiles.call(this, {'directory': dirPath, 'openDirectory': true});
         },
 
@@ -77,7 +77,7 @@ var socketConfig = {
 
             var the_file = fileData.file;
             var _this = this;
-            _this.deps.fs.readFile(fileData.path + '/' + the_file, 'utf8', function(e, d){
+            _this.deps.fs.readFile(the_file, 'utf8', function(e, d){
 
                 _this.emit('edit_file', {
                   'file': the_file,

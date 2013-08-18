@@ -102,11 +102,13 @@
 
                 var ul = document.createElement('ul');
                 selection.appendChild(ul);
-                for(key in data){
+                for(key in data.files){
 
                     var li = document.createElement('li');
-                    li.setAttribute('data-file', key);
-                    li.setAttribute('data-is-directory', data[key].type);
+                    // TODO - the following line is probably unnecessary now
+                    // since path & file are now combined
+                    li.setAttribute('data-file', data.path + '/' + key);
+                    li.setAttribute('data-is-directory', data.files[key].type);
                     li.innerHTML = key;
 
                     ul.appendChild(li);
@@ -114,9 +116,9 @@
             });
 
             for (key in data){
-
+                var path = data.path || 'projects';
                 var li = document.createElement('li');
-                li.setAttribute('data-file', key);
+                li.setAttribute('data-file', path + '/' + key);
                 li.setAttribute('data-is-directory', data[key].type);
                 li.innerHTML = key;
 

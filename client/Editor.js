@@ -29,7 +29,7 @@
                     'Ctrl-S': function(cm){
 
                         socket.emit('save_document',{
-                            'path': 'projects/' + the_file,
+                            'path': the_file,
                             'content': cm.doc.getValue()
                         })
                     }
