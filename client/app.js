@@ -22,13 +22,8 @@ terminal.addCommand('keydown', function(event, element){
 
 
 // Have socket listen for event to
-// create CodeMirror instance
+// update preview iframe
 /////////////////////////////////////
-socket.on('edit_file', function(data){
-
-    Editor.create('#codeMirror', data);
-});
-
 socket.on('update_files', function(data){
 
     var iframe = document.querySelector('iframe');

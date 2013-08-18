@@ -5,6 +5,11 @@
 
         this.socket = socket;
         this.framework = framework;
+
+        this.socket.on('edit_file', function(data){
+
+            this.create('#codeMirror', data);
+        }.bind(this));
     };
 
 
