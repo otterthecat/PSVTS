@@ -91,6 +91,13 @@ var socketConfig = {
         'load_files': function(directory){
 
             this.utils.loadFiles.call(this, {'directory': directory});
+        },
+
+        'terminal_command': function(cmd){
+
+            console.log("TERMINAL CMD = " + cmd);
+
+            this.emit('terminal_return', {'response': cmd});
         }
     }
 }

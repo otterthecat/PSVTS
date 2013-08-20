@@ -12,13 +12,7 @@ Panels.filesPanel.listen('return_file_data', function(data){
 
 // Terminal
 // /////////////////////////////////////
-var terminal = new Terminal();
-terminal.setInput('#console');
-terminal.addCommand('keydown', function(event, element){
-
-    console.log(event);
-    console.log(element);
-});
+var terminal = new Terminal(socket, '#console');
 
 
 // Have socket listen for event to
@@ -28,4 +22,10 @@ socket.on('update_files', function(data){
 
     var iframe = document.querySelector('iframe');
     iframe.contentWindow.location.reload();
+});
+
+socket.on('terminal_return', function(data){
+
+    console.log('terminal returns:');
+    console.log(data);
 });

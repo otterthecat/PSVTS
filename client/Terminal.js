@@ -1,29 +1,38 @@
 (function(){
 
-    var Terminal = function(){
+    var Terminal = function(socket, selector){
 
-        this.element = null;
-        this.commands = {};
+        this.socket = socket;
+        this.element = document.querySelector(selector);
+        this.history = [];
+
+        this.init();
     };
 
 
     Terminal.prototype = {
 
+        init: function(){
 
-        setInput: function(sel){
+            this.element.addEventListener('keydown', function(e){
 
-            this.element = document.querySelector(sel);
-            return this;
+                if(e.keyCode === 13){
+
+                    this.pushCmd(this.element.value);
+                }
+            }.bind(this));
         },
 
-        addCommand: function(name, callback){
+        pushCmd: function(cmd){
 
-            this.commands[name] = callback;
+            this.socket.emit('terminal_command', cmd);
+            this.history.push(cmd);
+            this.element.value = "";
+        },
 
-            this.element.addEventListener(name, function(e){
+        getHistory: function(int){
 
-                callback(e, this);
-            });
+            return this.history[int];
         }
     };
 
