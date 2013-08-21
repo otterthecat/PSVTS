@@ -1,7 +1,7 @@
 var socketConfig = {
 
     // any modules requred for listener callbacks
-    dependencies: ['fs', 'path'],
+    dependencies: ['fs', 'path', 'child_process'],
 
     // functions that can be shared across listener callbacks
     utils: {
@@ -91,13 +91,6 @@ var socketConfig = {
         'load_files': function(directory){
 
             this.utils.loadFiles.call(this, {'directory': directory});
-        },
-
-        'terminal_command': function(cmd){
-
-            console.log("TERMINAL CMD = " + cmd);
-
-            this.emit('terminal_return', {'response': cmd});
         }
     }
 }
