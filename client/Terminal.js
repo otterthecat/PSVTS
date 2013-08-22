@@ -21,6 +21,14 @@
                     this.pushCmd(this.element.value);
                 }
             }.bind(this));
+            console.log("INIT");
+            this.socket.on('terminal_return', function(data){
+                console.log("RETURNED");
+                var target = document.querySelector('#appFooter .terminalResponse');
+                var output  = data.error ?  data.error : data.out;
+
+                target.innerHTML = output;
+            }.bind(this));
         },
 
         pushCmd: function(cmd){

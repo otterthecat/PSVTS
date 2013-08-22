@@ -23,9 +23,3 @@ socket.on('update_files', function(data){
     var iframe = document.querySelector('iframe');
     iframe.contentWindow.location.reload();
 });
-
-socket.on('terminal_return', function(data){
-
-    console.log('terminal returns:');
-    console.log(data);
-});
