@@ -4,6 +4,7 @@
 
         this.socket = socket;
         this.element = document.querySelector(selector);
+        this.feedback = document.querySelector('#appFooter .terminalResponse');
         this.history = [];
 
         this.init();
@@ -16,18 +17,19 @@
 
             this.element.addEventListener('keydown', function(e){
 
+                this.feedback.innerHTML = "";
+
                 if(e.keyCode === 13){
 
                     this.pushCmd(this.element.value);
                 }
             }.bind(this));
-            console.log("INIT");
+
             this.socket.on('terminal_return', function(data){
-                console.log("RETURNED");
-                var target = document.querySelector('#appFooter .terminalResponse');
+
                 var output  = data.error ?  data.error : data.out;
 
-                target.innerHTML = output;
+                this.feedback.innerHTML = this.convertText(output);
             }.bind(this));
         },
 
@@ -41,6 +43,11 @@
         getHistory: function(int){
 
             return this.history[int];
+        },
+
+        convertText: function(str){
+
+            return str.replace(/\n/g, "<br/>");
         }
     };
 
