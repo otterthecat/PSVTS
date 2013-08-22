@@ -146,6 +146,8 @@
 
                 callback(data);
             });
+
+            return this;
         },
 
         emit: function(eventName, data){

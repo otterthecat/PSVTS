@@ -7,19 +7,14 @@ Panels.filesPanel.emit('load_files', 'projects');
 Panels.filesPanel.listen('return_file_data', function(data){
 
     Panels.filesPanel.generateDisplay(data.files);
+})
+.listen('update_files', function(data){
+
+    var iframe = document.querySelector('iframe');
+    iframe.contentWindow.location.reload();
 });
 
 
 // Terminal
 // /////////////////////////////////////
 var terminal = new Terminal(socket, '#console');
-
-
-// Have socket listen for event to
-// update preview iframe
-/////////////////////////////////////
-socket.on('update_files', function(data){
-
-    var iframe = document.querySelector('iframe');
-    iframe.contentWindow.location.reload();
-});
