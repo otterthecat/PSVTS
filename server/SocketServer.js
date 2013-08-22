@@ -57,4 +57,4 @@ SocketServer.prototype = {
     }
 };
 
-exports.SocketServer = SocketServer;
+module.exports = SocketServer;

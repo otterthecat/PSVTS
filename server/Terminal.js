@@ -45,6 +45,4 @@ Terminal.prototype = {
     }
 }
 
-
-
-exports.Terminal = Terminal;
+module.exports = Terminal;
