@@ -24,14 +24,19 @@ exports.utils = {
                   'type': is_dir,
                   'content': is_dir ? null : fs.readFileSync(working_path + '/' + _file, 'utf8')
                 }
+
+                if(is_dir){
+
+                  details[_file]['state'] = 'closed';
+                }
             }
 
             if(params.openDirectory) {
 
-                _this.emit('return_dir_content', {'files': details, 'path': working_path});
+                _this.emit('return_dir_content', {'files': details});
             } else {
 
-                _this.emit('return_file_data', {'files': details, 'path': working_path});
+                _this.emit('return_file_data', {'files': details});
             }
 
         });

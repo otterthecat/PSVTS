@@ -69,7 +69,16 @@
 
              if(selection.getAttribute('data-is-directory') === 'true') {
 
-                this.emitDirectoryRequest(selection);
+                if(selection.getAttribute('data-state') === 'closed') {
+
+                    selection.setAttribute('data-state', 'open');
+                    this.emitDirectoryRequest(selection);
+                } else {
+
+                    selection.setAttribute('data-state', 'closed');
+                    var submenu = selection.querySelector('ul');
+                    delete selection.removeChild(submenu);
+                }
              } else {
 
                 this.emitFileRequest(selection);
@@ -120,7 +129,13 @@
                     var li = document.createElement('li');
 
                     li.setAttribute('data-file', data.path + '/' + key);
-                    li.setAttribute('data-is-directory', data.files[key].type);
+
+                    if(data.files[key].type){
+
+                        li.setAttribute('data-is-directory', data.files[key].type);
+                        li.setAttribute('data-state', data.files[key].state);
+                    }
+
                     li.innerHTML = key;
 
                     ul.appendChild(li);
@@ -131,7 +146,12 @@
                 var path = data.path || 'projects';
                 var li = document.createElement('li');
                 li.setAttribute('data-file', path + '/' + key);
-                li.setAttribute('data-is-directory', data[key].type);
+
+                if(data[key].type){
+
+                    li.setAttribute('data-is-directory', data[key].type);
+                    li.setAttribute('data-state', data[key].state);
+                }
                 li.innerHTML = key;
 
                 // this should really be done after the loop
