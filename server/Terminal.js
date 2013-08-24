@@ -36,11 +36,13 @@ Terminal.prototype = {
 
             this.childProcess.exec(pCmd.cmd + " " + pCmd.params, function(error, stdout, stderror){
 
-                    this.socket.emit('terminal_return', {'out': stdout, 'error': stderror});
+            // return call included for testing until better mocking solution
+            return this.socket.emit('terminal_return', {'out': stdout, 'error': stderror});
             }.bind(this));
         } else {
 
-            this.socket.emit('terminal_return', {'out': 'null', 'error': 'command not allowed'});
+            // return call included for testing until better mocking solution
+            return this.socket.emit('terminal_return', {'out': 'null', 'error': 'command not allowed'});
         }
     }
 }
