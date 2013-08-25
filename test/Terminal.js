@@ -1,7 +1,9 @@
 // assertion library
-var should = require('chai').should();
+var chai = require('chai').should();
 
-// mocks
+
+// Mocks
+// //////////////////////////////////////////////////////
 var MockSocket = function(){};
 MockSocket.prototype = {
     on: function(name, cb){
@@ -11,27 +13,34 @@ MockSocket.prototype = {
 
     emit: function(name, ob){
 
-        return {'out': null, 'error': 'command not allowed'};
+        return ob;
     }
 };
 var s = new MockSocket();
 
-var MockChildProcess = function(){};
-MockChildProcess.prototype = {
 
+var mockChildProcess = function(){};
+mockChildProcess.prototype = {
+
+    'exec': function(str, callback){
+
+       return callback('null', 'output success', '');
+    }
 };
+var mcp = new mockChildProcess();
 
-var cmd = "ls ../../";
 
+var cmd = 'ls ../';
 var fail_cmd = 'git status';
 
 
-// modules to tes
+// modules to test
+// /////////////////////////////////////////////////////////
 var Terminal = require('../server/Terminal');
-var terminal = new Terminal({}, s);
+var terminal = new Terminal(mcp, s);
 
 
-describe('terminal', function(){
+describe('Terminal', function(){
 
     it('should assign internal socket property', function(){
 
@@ -54,7 +63,13 @@ describe('terminal', function(){
 
     describe('#process()', function(){
 
-        it('should return error if command is not allowed', function(){
+        it('should return output if input command is allowed', function(){
+
+            terminal.process(cmd).should.have.deep.property('out', 'output success');
+        });
+
+        it('should return error if input command is not allowed', function(){
+
 
             terminal.process(fail_cmd).should.have.deep.property('error', 'command not allowed');
         });

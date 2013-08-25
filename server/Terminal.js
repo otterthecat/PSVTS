@@ -34,10 +34,10 @@ Terminal.prototype = {
 
         if(this.allowedCommands.hasOwnProperty(pCmd.cmd)) {
 
-            this.childProcess.exec(pCmd.cmd + " " + pCmd.params, function(error, stdout, stderror){
+            return this.childProcess.exec(pCmd.cmd + " " + pCmd.params, function(error, stdout, stderror){
 
-            // return call included for testing until better mocking solution
-            return this.socket.emit('terminal_return', {'out': stdout, 'error': stderror});
+                // return call included for testing until better mocking solution
+                return this.socket.emit('terminal_return', {'out': stdout, 'error': stderror});
             }.bind(this));
         } else {
 
