@@ -38,6 +38,15 @@ io.sockets.on('connection', function(socket){
         console.log(data);
         console.log("========================================");
         var user = new User(data);
-        user.save();
+        user.save(function(err, usr, numAffected){
+
+            if(err){
+
+                socket.emit('login_error', err);
+            } else {
+
+                socket.emit('login_created', usr);
+            }
+        });
     });
 });

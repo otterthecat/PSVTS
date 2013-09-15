@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Keep it Secret. Keep it Safe.</title>
+    <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="node_modules/codemirror/theme/twilight.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="node_modules/codemirror/lib/codemirror.js"></script>
+    <script src="node_modules/codemirror/mode/javascript/javascript.js"></script>
+    <script src="node_modules/codemirror/mode/css/css.js"></script>
+    <script src="node_modules/codemirror/mode/less/less.js"></script>
+    <script src="node_modules/codemirror/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="http://127.0.0.1:4000/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+
+    <div class="app ">
+
+        <form class="login" action="/login">
+            <label for="name">
+                Name:
+                <input type="text" name="name"/>
+            </label>
+
+            <label for="password">
+                Password:
+                <input type="text" name="password"/>
+            </label>
+
+            <label for="email">
+                Email:
+                <input type="text" name="email"/>
+            </label>
+
+            <button type="submit">Login</button>
+        </form>
+
+    <div>
+
+    <script src="client/socket.js"></script>
+    <script src="client/Login.js"></script>
+    <script>
+
+        var login = new Login(socket);
+    </script>
+</body>
+</html>

@@ -1,7 +1,8 @@
 // Create interface panel modules
 /////////////////////////////////////
 Panels.setSocket(socket);
-Panels.topPanel.setSocket(socket).setLogin().setPreviewToggle(document.querySelector('#appHeader button'), document.querySelector('#main') );
+Panels.topPanel.setSocket(socket)
+    .setPreviewToggle(document.querySelector('#appHeader [data-menu="preview"]'), document.querySelector('#main') );
 Panels.filesPanel.setDisplay(document.querySelector('#fileList'), socket);
 Panels.filesPanel.emit('load_files', 'projects');
 Panels.filesPanel.listen('return_file_data', function(data){

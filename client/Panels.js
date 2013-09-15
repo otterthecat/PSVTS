@@ -57,40 +57,19 @@
         setPreviewToggle: function(element, toggleTarget){
 
             this.element = element;
-            // this.element.addEventListener('click', function(event){
+            this.element.addEventListener('click', function(event){
 
-            //     var currentClass = toggleTarget.className;
+                var currentClass = toggleTarget.className;
 
-            //     if(currentClass.indexOf(' slide ') !== -1){
-            //         event.currentTarget.innerHTML = "Preview";
-            //         toggleTarget.className = currentClass.replace(' slide ', '');
-            //     } else {
-            //         event.currentTarget.innerHTML = "Editor";
-            //         toggleTarget.className += ' slide ';
-            //     }
-            // });
-        },
-
-        setLogin: function(dataAttr){
-
-            var selector = dataAttr || '[data-form="login"]';
-            var submitter = document.querySelector(selector);
-
-            submitter.addEventListener('click', function(event){
-
-                event.preventDefault();
-
-                var data = {
-                    name: document.querySelector('input[name="name"]').value,
-                    email: document.querySelector('input[name="email"]').value,
-                    password: document.querySelector('input[name="password"]').value
+                if(currentClass.indexOf(' slide ') !== -1){
+                    event.currentTarget.innerHTML = "Preview";
+                    toggleTarget.className = currentClass.replace(' slide ', '');
+                } else {
+                    event.currentTarget.innerHTML = "Editor";
+                    toggleTarget.className += ' slide ';
                 }
-
-                this.socket.emit('login', data);
-            }.bind(this));
-
-            return this;
-        }
+            });
+        },
     };
 
     FilesPanel.prototype = {
