@@ -22,6 +22,10 @@ module.exports = function(grunt) {
     },
 
     csslint: {
+      options: {
+        'box-sizing': false
+      },
+
       src: ['css/*.css']
     }
   });
