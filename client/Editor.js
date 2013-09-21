@@ -36,7 +36,7 @@
                         socket.emit('save_document',{
                             'path': the_file,
                             'content': cm.doc.getValue()
-                        })
+                        });
                     }
                 },
                 mode: params.mode

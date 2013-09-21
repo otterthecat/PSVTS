@@ -10,7 +10,7 @@
 
     var TopPanel = function(){
         this.preview = {};
-        this.socket;
+        this.socket = null;
     };
 
     var FilesPanel = function(){
@@ -34,6 +34,13 @@
             return this;
         },
 
+        removePanel: function(name){
+
+            this[name].remove();
+            delete this[name];
+            return this;
+        },
+
         setSocket: function(socket){
             this.socket = socket;
             return this;
@@ -43,7 +50,7 @@
 
             return this.socket;
         }
-    }
+    };
 
     TopPanel.prototype = {
 
@@ -86,7 +93,9 @@
 
                     selection.setAttribute('data-state', 'closed');
                     var submenu = selection.querySelector('ul');
-                    delete selection.removeChild(submenu);
+
+                    // TODO - would like to remove from memory as well
+                    selection.removeChild(submenu);
                 }
              } else {
 
@@ -133,7 +142,7 @@
 
                 var ul = document.createElement('ul');
                 selection.appendChild(ul);
-                for(key in data.files){
+                for(var key in data.files){
 
                     var li = document.createElement('li');
 
@@ -151,7 +160,7 @@
                 }
             });
 
-            for (key in data){
+            for (var key in data){
                 var path = data.path || 'projects';
                 var li = document.createElement('li');
                 li.setAttribute('data-file', path + '/' + key);

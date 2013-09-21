@@ -37,11 +37,11 @@ FilesPanel.prototype = {
                 details[_file] = {
                   'type': is_dir,
                   'content': is_dir ? null : fs.readFileSync(working_path + '/' + _file, 'utf8')
-                }
+                };
 
                 if(is_dir){
 
-                  details[_file]['state'] = 'closed';
+                  details[_file].state = 'closed';
                 }
             }
 

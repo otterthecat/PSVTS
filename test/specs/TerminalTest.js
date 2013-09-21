@@ -20,12 +20,12 @@ describe('Terminal', function(){
 
     it('should assign internal socket property', function(){
 
-        terminal.socket.should.be.an('object')
+        terminal.socket.should.be.an('object');
     });
 
     it('should assign internal childProcess property', function(){
 
-        terminal.childProcess.should.be.an('object')
+        terminal.childProcess.should.be.an('object');
     });
 
 

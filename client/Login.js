@@ -32,7 +32,7 @@
                     name: this.name.value,
                     email: this.email.value,
                     password: this.password.value
-                }
+                };
 
                 _this.socket.emit('login', details);
             });

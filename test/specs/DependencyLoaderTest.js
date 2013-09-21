@@ -37,7 +37,7 @@ describe('DependencyLoader', function(){
 
         it('should return correct #deps property when passing name', function(){
 
-           dependencyLoader.deps['fs'] = {'fake': 'object'};
+           dependencyLoader.deps.fs = {'fake': 'object'};
            dependencyLoader.get('fs').should.deep.equal(dependencyLoader.deps.fs);
         });
     });
