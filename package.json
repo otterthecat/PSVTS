@@ -24,6 +24,7 @@
     "grunt-contrib-jshint": "*",
     "grunt-contrib-csslint": "*",
     "grunt-browserify": "*",
+    "grunt-mocha-cli": "*",
 
     "mocha": "*",
     "chai": "*",

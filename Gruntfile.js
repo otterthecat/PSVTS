@@ -12,6 +12,15 @@ module.exports = function(grunt) {
 
     },
 
+
+    mochacli: {
+        options: {
+            reporter: 'nyan',
+            bail: true
+        },
+        files: ['test/specs/*.js']
+    },
+
     csslint: {
       src: ['css/*.css']
     }
@@ -19,11 +28,12 @@ module.exports = function(grunt) {
 
   // Load Grunt Tasks
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-mocha-cli');
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'csslint']);
+  grunt.registerTask('default', ['jshint', 'mochacli', 'csslint']);
 
   grunt.registerTask('compile', ['browserify']);
 
