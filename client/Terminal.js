@@ -4,7 +4,7 @@
 
         this.socket = socket;
         this.element = document.querySelector(selector);
-        this.feedback = document.querySelector('#appFooter .terminalResponse');
+        this.feedback = document.querySelector('.appFooter .terminalResponse');
         this.history = [];
 
         this.init();
