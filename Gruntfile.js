@@ -21,6 +21,18 @@ module.exports = function(grunt) {
         files: ['test/specs/*.js']
     },
 
+    complexity: {
+        generic: {
+            src: ['server/*.js'],
+            options: {
+                errorsOnly: false, // show only maintainability errors
+                cyclomatic: 3,
+                halstead: 10,
+                maintainability: 100
+            }
+        },
+    },
+
     csslint: {
       options: {
         'box-sizing': false
@@ -33,12 +45,14 @@ module.exports = function(grunt) {
   // Load Grunt Tasks
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-cli');
+  grunt.loadNpmTasks('grunt-complexity');
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'mochacli', 'csslint']);
-
+  grunt.registerTask('default', ['jshint', 'mochacli', 'complexity', 'csslint']);
+  grunt.registerTask('js', ['jshint', 'mochacli', 'complexity']);
+  grunt.registerTask('css', ['csslint']);
   grunt.registerTask('compile', ['browserify']);
 
 };
