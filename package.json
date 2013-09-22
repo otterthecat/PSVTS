@@ -14,6 +14,9 @@
     "url": "https://github.com/otterthecat/PSVTS.git"
   },
 
+
+  "//": "Below are dependencies for the project (app imports, grunt tasks, and unit testing)",
+
   "dependencies": {
 
     "codemirror": "3.15.0",
@@ -23,6 +26,10 @@
     "grunt": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-csslint": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-mincss": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
     "grunt-browserify": "*",
     "grunt-complexity": "*",
     "grunt-mocha-cli": "*",
