@@ -35,7 +35,9 @@ module.exports = function(grunt) {
 
     csslint: {
       options: {
-        'box-sizing': false
+        'box-sizing': false,
+        'box-model': false,
+        'adjoining-classes': false
       },
 
       src: ['css/*.css']

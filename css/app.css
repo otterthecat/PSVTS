@@ -8,11 +8,15 @@ body {
   margin: 0;
   min-height: 300px;
 }
+h2 {
+  margin: 0;
+  padding: 8px;
+}
 .login {
   width: 200px;
   margin: 50px auto;
   padding: 15px;
-  boder: 1px solid #333;
+  border: 1px solid #333;
   background: #666;
 }
 .login label {
@@ -33,26 +37,26 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.app #appHeader,
-.app #appFooter {
+.app .appHeader,
+.app .appFooter {
   height: 5%;
   background-color: #313131;
 }
-.app #appHeader {
+.app .appHeader {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
 }
-.app #appHeader .menu {
+.app .appHeader .menu {
   margin: 0;
   padding: 0;
 }
-.app #appHeader .menu li {
+.app .appHeader .menu li {
   display: inline;
   cursor: pointer;
 }
-.app #main {
+.app .main {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -62,8 +66,8 @@ body {
   background-color: #333;
   position: relative;
 }
-.app #main .editor,
-.app #main .preview {
+.app .main .editor,
+.app .main .preview {
   width: 100%;
   height: 100%;
   background-color: #575757;
@@ -72,44 +76,41 @@ body {
   transition-duration: left 100ms linear;
   -webkit-transition: left 100ms linear;
   -moz-transition: left 100ms linear;
+  -o-transition: left 100ms linear;
 }
-.app #main .editor #nav,
-.app #main .editor #codeMirror {
+.app .main .editor .nav,
+.app .main .editor .codeMirror {
   float: left;
 }
-.app #main .editor #nav {
+.app .main .editor .nav {
   width: 15%;
   height: 100%;
   word-wrap: break-word;
   background-color: #3e3e3e;
 }
-.app #main .editor #nav h2 {
+.app .main .editor .nav ul {
   margin: 0;
   padding: 8px;
 }
-.app #main .editor #nav ul {
-  margin: 0;
-  padding: 8px;
-}
-.app #main .editor #nav ul li {
+.app .main .editor .nav ul li {
   cursor: pointer;
 }
-.app #main .editor #codeMirror {
+.app .main .editor .codeMirror {
   width: 85%;
   height: 100%;
 }
-.app #main .preview {
+.app .main .preview {
   left: 100%;
   background-color: #4a4a4a;
 }
-.app #main .preview iframe {
+.app .main .preview iframe {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
 }
-.app #appFooter {
+.app .appFooter {
   min-height: 5%;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -117,10 +118,10 @@ body {
   box-sizing: border-box;
   width: 100%;
 }
-#main.slide .editor {
+.main.slide .editor {
   left: -100%;
 }
-#main.slide .preview {
+.main.slide .preview {
   left: 0;
 }
 /* OVERRIDES for CodeMirror default styles
