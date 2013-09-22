@@ -5,15 +5,28 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
+
       files: ['client/*.js', 'server/*/*.js', 'test/specs/*.js'],
       options: {
         ignores: ['server/db/*.js']
       }
-
     },
 
+    browserify: {
+
+      basic: {
+
+        src: ['client/app.js'],
+        dest: 'js/app.js',
+        options: {
+
+          debug: true
+        }
+      }
+    },
 
     mochacli: {
+
         options: {
             reporter: 'nyan',
             bail: true
@@ -22,6 +35,7 @@ module.exports = function(grunt) {
     },
 
     complexity: {
+
         generic: {
             src: ['server/*.js'],
             options: {
@@ -34,6 +48,7 @@ module.exports = function(grunt) {
     },
 
     csslint: {
+
       options: {
         'box-sizing': false,
         'box-model': false,

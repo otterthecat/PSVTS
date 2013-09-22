@@ -1,5 +1,3 @@
-(function(){
-
 /* *********************************
     Define basic panel objects
  ******************************** */
@@ -206,8 +204,9 @@
 /* ***********************************
     Instantiate Panels
 *********************************** */
-    var p = window.Panels = new Panels();
+    var p = new Panels();
     p.addPanel('topPanel', new TopPanel() )
         .addPanel('filesPanel', new FilesPanel() )
         .addPanel('consolePanel', new ConsolePanel() );
-})();
+
+exports.Panels = p;

@@ -1,3 +1,13 @@
+// Import
+/////////////////////////////////////
+var socket = require('./socket').socket;
+var Editor = require('./Editor');
+var Panels = require('./Panels').Panels;
+var Terminal = require('./Terminal');
+
+var editor = new Editor(CodeMirror, socket);
+
+
 // Create interface panel modules
 /////////////////////////////////////
 Panels.setSocket(socket);

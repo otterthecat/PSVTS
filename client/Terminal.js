@@ -1,55 +1,52 @@
-(function(){
+var Terminal = function(socket, selector){
 
-    var Terminal = function(socket, selector){
+    this.socket = socket;
+    this.element = document.querySelector(selector);
+    this.feedback = document.querySelector('.appFooter .terminalResponse');
+    this.history = [];
 
-        this.socket = socket;
-        this.element = document.querySelector(selector);
-        this.feedback = document.querySelector('.appFooter .terminalResponse');
-        this.history = [];
-
-        this.init();
-    };
+    this.init();
+};
 
 
-    Terminal.prototype = {
+Terminal.prototype = {
 
-        init: function(){
+    init: function(){
 
-            this.element.addEventListener('keydown', function(e){
+        this.element.addEventListener('keydown', function(e){
 
-                this.feedback.innerHTML = "";
+            this.feedback.innerHTML = "";
 
-                if(e.keyCode === 13){
+            if(e.keyCode === 13){
 
-                    this.pushCmd(this.element.value);
-                }
-            }.bind(this));
+                this.pushCmd(this.element.value);
+            }
+        }.bind(this));
 
-            this.socket.on('terminal_return', function(data){
+        this.socket.on('terminal_return', function(data){
 
-                var output  = data.error ?  data.error : data.out;
+            var output  = data.error ?  data.error : data.out;
 
-                this.feedback.innerHTML = this.convertText(output);
-            }.bind(this));
-        },
+            this.feedback.innerHTML = this.convertText(output);
+        }.bind(this));
+    },
 
-        pushCmd: function(cmd){
+    pushCmd: function(cmd){
 
-            this.socket.emit('terminal_command', cmd);
-            this.history.push(cmd);
-            this.element.value = "";
-        },
+        this.socket.emit('terminal_command', cmd);
+        this.history.push(cmd);
+        this.element.value = "";
+    },
 
-        getHistory: function(int){
+    getHistory: function(int){
 
-            return this.history[int];
-        },
+        return this.history[int];
+    },
 
-        convertText: function(str){
+    convertText: function(str){
 
-            return str.replace(/\n/g, "<br/>");
-        }
-    };
+        return str.replace(/\n/g, "<br/>");
+    }
+};
 
-    window.Terminal = Terminal;
-})();
+module.exports = Terminal;
