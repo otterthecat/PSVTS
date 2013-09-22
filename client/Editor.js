@@ -8,7 +8,7 @@
 
         this.socket.on('edit_file', function(data){
 
-            this.create('#codeMirror', data);
+            this.create('.codeMirror', data);
         }.bind(this));
     };
 

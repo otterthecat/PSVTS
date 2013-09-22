@@ -127,7 +127,7 @@
 
         generateDisplay: function(data){
 
-            var ul = document.querySelector('ul#fileList');
+            var ul = document.querySelector('ul.fileList');
             var socket = this.socket;
             var selection;
             ul.onclick = function(event){
