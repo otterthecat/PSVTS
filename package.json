@@ -33,6 +33,7 @@
     "grunt-browserify": "*",
     "grunt-complexity": "*",
     "grunt-mocha-cli": "*",
+    "grunt-plato": "*",
 
     "mocha": "*",
     "chai": "*",

@@ -92,6 +92,17 @@ module.exports = function(grunt) {
         files: 'client/*.js',
         tasks: ['js']
       }
+    },
+
+    plato: {
+      dev: {
+        options : {
+          jshint : false
+        },
+        files: {
+          'reports': ['server/*.js'],
+        },
+      },
     }
   });
 
@@ -103,9 +114,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-complexity');
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-plato');
 
   // Defined task(s).
   grunt.registerTask('default', ['jshint', 'mochacli', 'complexity', 'csslint']);
   grunt.registerTask('js', ['jshint', 'mochacli', 'complexity', 'browserify']);
   grunt.registerTask('css', ['less:dev', 'csslint']);
+  grunt.registerTask('report', ['plato:dev']);
 };
