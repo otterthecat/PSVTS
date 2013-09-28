@@ -41,7 +41,7 @@ module.exports = function(grunt) {
     complexity: {
 
         generic: {
-            src: ['server/*.js'],
+            src: ['server/*.js', 'client/*.js'],
             options: {
 
                 /*
