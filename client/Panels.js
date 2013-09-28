@@ -80,8 +80,7 @@
     FilesPanel.prototype = {
 
         emitSelection: function(selection){
-            console.log("--");
-            console.log(selection);
+
              if(selection.getAttribute('data-is-directory') === 'true') {
 
                 if(selection.getAttribute('data-state') === 'closed') {
@@ -97,7 +96,7 @@
                     selection.removeChild(submenu);
                 }
              } else {
-                console.log(selection);
+
                 this.emitFileRequest(selection);
              }
         },
@@ -144,8 +143,7 @@
                 for(var key in data.files){
 
                     var li = document.createElement('li');
-                    console.log("key is ");
-                    console.log(key);
+
                     li.setAttribute('data-file', key);
 
                     if(data.files[key].type){

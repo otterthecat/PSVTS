@@ -10,8 +10,7 @@ var FilesPanel = function(settings){
     }.bind(this));
 
     this.socket.on('open_dir', function(dir){
-        console.log("*************");
-        console.log(dir);
+
         var dirPath = dir.directory;
         this.loadFiles.call(this, {'directory': dirPath, 'openDirectory': true});
     }.bind(this));
@@ -29,9 +28,7 @@ FilesPanel.prototype = {
 
             var details = {};
             var fileList = files;
-            console.log("++++++++++++");
-            console.log(files);
-            console.log("++++++++++++");
+
             for(var i = 0; i < fileList.length; i += 1){
 
                 var _file = working_path + '/' + fileList[i];
@@ -49,9 +46,7 @@ FilesPanel.prototype = {
             }
 
             if(params.openDirectory) {
-                console.log("--------------------");
-                console.log(details);
-                console.log("--------------------");
+
                 this.socket.emit('return_dir_content', {'files': details});
             } else {
 
