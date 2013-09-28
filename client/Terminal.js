@@ -21,6 +21,7 @@ Terminal.prototype = {
 
         this.element.addEventListener('keydown', function(e){
 
+            this.feedback.classList.remove('show');
             this.feedback.innerHTML = "";
 
             if(e.keyCode === 13){
@@ -33,6 +34,7 @@ Terminal.prototype = {
     onDataReturn: function(data){
 
         var output  = data.error ?  data.error : data.out;
+        this.feedback.classList.add('show');
         this.feedback.innerHTML = this.convertText(output);
     },
 
