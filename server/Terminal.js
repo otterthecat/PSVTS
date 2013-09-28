@@ -19,13 +19,13 @@ Terminal.prototype = {
     parse: function(str){
 
         var cmdArray = str.split(" ");
-        var parsedCmd = cmdArray.shift();;
+        var parsedCmd = cmdArray.shift();
         var parsedParams = cmdArray.join(" ");
 
         return {
             cmd: parsedCmd,
             params: parsedParams
-        }
+        };
     },
 
     process: function(cmd){
@@ -45,6 +45,6 @@ Terminal.prototype = {
             return this.socket.emit('terminal_return', {'out': 'null', 'error': 'command not allowed'});
         }
     }
-}
+};
 
 module.exports = Terminal;

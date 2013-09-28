@@ -100,7 +100,7 @@ module.exports = function(grunt) {
           jshint : false
         },
         files: {
-          'reports': ['server/*.js'],
+          'reports': ['server/*.js', 'client/*.js'],
         },
       },
     }

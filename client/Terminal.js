@@ -13,6 +13,12 @@ Terminal.prototype = {
 
     init: function(){
 
+        this.applyTriggerEvent();
+        this.socket.on('terminal_return', this.onDataReturn.bind(this));
+    },
+
+    applyTriggerEvent: function(){
+
         this.element.addEventListener('keydown', function(e){
 
             this.feedback.innerHTML = "";
@@ -22,13 +28,12 @@ Terminal.prototype = {
                 this.pushCmd(this.element.value);
             }
         }.bind(this));
+    },
 
-        this.socket.on('terminal_return', function(data){
+    onDataReturn: function(data){
 
-            var output  = data.error ?  data.error : data.out;
-
-            this.feedback.innerHTML = this.convertText(output);
-        }.bind(this));
+        var output  = data.error ?  data.error : data.out;
+        this.feedback.innerHTML = this.convertText(output);
     },
 
     pushCmd: function(cmd){

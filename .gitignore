@@ -50,3 +50,7 @@ nbproject/*
 .buildpath
 *.sublime-project
 *.sublime-workspace
+
+# GENERATED REPORTS #
+#####################
+reports/

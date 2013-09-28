@@ -26,6 +26,6 @@ DepLoader.prototype = {
 
         return this.deps[name] || null;
     }
-}
+};
 
 module.exports = DepLoader;
