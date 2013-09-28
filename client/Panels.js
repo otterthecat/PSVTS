@@ -80,7 +80,8 @@
     FilesPanel.prototype = {
 
         emitSelection: function(selection){
-
+            console.log("--");
+            console.log(selection);
              if(selection.getAttribute('data-is-directory') === 'true') {
 
                 if(selection.getAttribute('data-state') === 'closed') {
@@ -96,7 +97,7 @@
                     selection.removeChild(submenu);
                 }
              } else {
-
+                console.log(selection);
                 this.emitFileRequest(selection);
              }
         },
@@ -143,8 +144,9 @@
                 for(var key in data.files){
 
                     var li = document.createElement('li');
-
-                    li.setAttribute('data-file', data.path + '/' + key);
+                    console.log("key is ");
+                    console.log(key);
+                    li.setAttribute('data-file', key);
 
                     if(data.files[key].type){
 
@@ -152,7 +154,8 @@
                         li.setAttribute('data-state', data.files[key].state);
                     }
 
-                    li.innerHTML = key;
+                    var _text = key.split('/');
+                    li.innerHTML = _text[_text.length-1];
 
                     ul.appendChild(li);
                 }
@@ -161,14 +164,17 @@
             for (var key in data){
                 var path = data.path || 'projects';
                 var li = document.createElement('li');
-                li.setAttribute('data-file', path + '/' + key);
+                li.setAttribute('data-file', key);
 
                 if(data[key].type){
 
                     li.setAttribute('data-is-directory', data[key].type);
                     li.setAttribute('data-state', data[key].state);
                 }
-                li.innerHTML = key;
+
+                // TODO - extract this to own method
+                var _text = key.split('/');
+                li.innerHTML = _text[_text.length-1];
 
                 // this should really be done after the loop
                 // with the full list of elements (use string instead of object)
