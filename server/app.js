@@ -34,9 +34,7 @@ io.sockets.on('connection', function(socket){
     var terminal = new Terminal(deps.get('child_process'), socket);
 
     socket.on('login', function(data){
-        console.log("========================================");
-        console.log(data);
-        console.log("========================================");
+
         var user = new User(data);
         user.save(function(err, usr, numAffected){
 
