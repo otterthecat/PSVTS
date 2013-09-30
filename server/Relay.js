@@ -14,7 +14,7 @@ util.inherits(Relay, events.EventEmitter);
 // add new methods
 Relay.prototype.addRelay = function(obj){
 
-    this.relays.push[obj];
+    this.relays.push(obj);
     return this;
 };
 
