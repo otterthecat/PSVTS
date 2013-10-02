@@ -1,6 +1,9 @@
-var Editor = function(socket, fs, path){
+var Relay = require('./Relay');
+var util = require('util');
 
-    this.socket = socket;
+var Editor = function(fs, path){
+
+    Relay.call(this);
     this.fs = fs;
     this.path = path;
 
@@ -11,38 +14,42 @@ var Editor = function(socket, fs, path){
         'html': 'xml'
     };
 
-    this.socket.on('save_document', function(doc){
+    this.init();
+};
+
+util.inherits(Editor, Relay);
+
+Editor.prototype.init = function(){
+
+    this.on('save_document', function(doc){
 
         var content = doc.content;
 
         var stream = this.fs.createWriteStream(doc.path, {'flags': 'w'});
         stream.write(content);
 
-        this.socket.emit('saved_doc', {saved: true});
-    }.bind(this));
+        this.runRelays('saved_doc', {saved: true});
+    });
 
-    this.socket.on('get_file', function(fileData){
+    this.on('get_file', function(fileData){
 
         var the_file = fileData.file;
         this.fs.readFile(the_file, 'utf8', function(e, d){
 
-            this.socket.emit('edit_file', {
+            this.runRelays('edit_file', {
               'file': the_file,
               'path': fileData.path,
               'mode': this.getMode.call(this, the_file),
               'content': d
             });
         }.bind(this));
-    }.bind(this));
+    });
 };
 
-Editor.prototype = {
+Editor.prototype.getMode = function(fileName){
 
-    'getMode': function(fileName){
-
-        var extension = this.path.extname(fileName).substr(1);
-        return this.modes[extension];
-    }
+    var extension = this.path.extname(fileName).substr(1);
+    return this.modes[extension];
 };
 
 module.exports = Editor;

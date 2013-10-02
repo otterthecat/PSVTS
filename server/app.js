@@ -29,7 +29,16 @@ io.sockets.on('connection', function(socket){
 
     previewPanel.watch();
 
-    var editor = new Editor(socket, deps.get('fs'), deps.get('path'));
+    var editor = new Editor(deps.get('fs'), deps.get('path'));
+    editor.addRelay(socket);
+    socket.on('get_file', function(data){
+
+        editor.emit('get_file', data);
+    })
+    .on('save_document', function(data){
+
+        editor.emit('save_document', data);
+    });
 
     var terminal = new Terminal(deps.get('child_process'));
     terminal.addRelay(socket);

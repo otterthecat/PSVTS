@@ -15,13 +15,13 @@ var path = new Path();
 // modules to test
 // /////////////////////////////////////////////////////////
 var Editor = require('../../server/Editor');
-var editor = new Editor(mock, mock, path);
+var editor = new Editor(mock, path);
 
 describe('Editor', function(){
 
-    it('should set internal socket from passed socket object', function(){
+    it('should inherit relays propery', function(){
 
-        editor.socket.should.deep.equal(mock);
+        editor.should.have.property('relays');
     });
 
     it('should set internal fs from passeed fs object', function(){
