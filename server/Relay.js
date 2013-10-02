@@ -27,6 +27,8 @@ Relay.prototype.runRelays = function(ev, data){
 
         this.relays[i].emit(ev, data);
     };
+
+    return this;
 };
 
 // Add constructor to exports

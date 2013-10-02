@@ -1,6 +1,9 @@
-var Terminal = function(cp, socket){
+var Relay = require('./Relay');
+var util = require('util');
 
-    this.socket = socket;
+var Terminal = function(cp){
+
+    Relay.call(this);
     this.childProcess = cp;
     this.allowedCommands = {
         'ls': 'ls',
@@ -8,42 +11,46 @@ var Terminal = function(cp, socket){
         'mkdir': 'mkdir'
     };
 
-    this.socket.on('terminal_command', function(data){
-
-        this.process(data);
-    }.bind(this));
+    this.init();
 };
 
-Terminal.prototype = {
+util.inherits(Terminal, Relay);
 
-    parse: function(str){
+Terminal.prototype.init =function(){
 
-        var cmdArray = str.split(" ");
-        var parsedCmd = cmdArray.shift();
-        var parsedParams = cmdArray.join(" ");
+    this.on('terminal_command', function(data){
 
-        return {
-            cmd: parsedCmd,
-            params: parsedParams
-        };
-    },
+        this.process(data);
+    });
+};
 
-    process: function(cmd){
+Terminal.prototype.parse = function(str){
 
-        var pCmd = this.parse(cmd);
+    var cmdArray = str.split(" ");
+    var parsedCmd = cmdArray.shift();
+    var parsedParams = cmdArray.join(" ");
 
-        if(this.allowedCommands.hasOwnProperty(pCmd.cmd)) {
+    return {
+        cmd: parsedCmd,
+        params: parsedParams
+    };
+};
 
-            return this.childProcess.exec(pCmd.cmd + " " + pCmd.params, function(error, stdout, stderror){
+Terminal.prototype.process = function(cmd){
 
-                // return call included for testing until better mocking solution
-                return this.socket.emit('terminal_return', {'out': stdout, 'error': stderror});
-            }.bind(this));
-        } else {
+    var pCmd = this.parse(cmd);
+
+    if(this.allowedCommands.hasOwnProperty(pCmd.cmd)) {
+
+        return this.childProcess.exec(pCmd.cmd + " " + pCmd.params, function(error, stdout, stderror){
 
             // return call included for testing until better mocking solution
-            return this.socket.emit('terminal_return', {'out': 'null', 'error': 'command not allowed'});
-        }
+            return this.runRelays('terminal_return', {'out': stdout, 'error': stderror});
+        }.bind(this));
+    } else {
+
+        // return call included for testing until better mocking solution
+        return this.runRelays('terminal_return', {'out': 'null', 'error': 'command not allowed'});
     }
 };
 

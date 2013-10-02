@@ -5,7 +5,7 @@ var DL = require('./DependencyLoader');
 var Panels = require('./Panels');
 var Editor = require('./Editor');
 var Terminal = require('./Terminal');
-var User = require('./db/User');
+var User = require('./db/UserModel');
 
 
 io.sockets.on('connection', function(socket){
@@ -31,7 +31,12 @@ io.sockets.on('connection', function(socket){
 
     var editor = new Editor(socket, deps.get('fs'), deps.get('path'));
 
-    var terminal = new Terminal(deps.get('child_process'), socket);
+    var terminal = new Terminal(deps.get('child_process'));
+    terminal.addRelay(socket);
+    socket.on('terminal_command', function(data){
+
+        terminal.emit('terminal_command', data);
+    });
 
     socket.on('login', function(data){
 
