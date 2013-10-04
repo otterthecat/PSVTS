@@ -1,20 +1,23 @@
+var Relay = require('../Relay');
+var util = require('util');
+
 var PreviewPanel = function(opts){
 
-    this.socket = opts.socket;
+    Relay.call(this);
     this.fs = opts.fs;
 
 };
 
-PreviewPanel.prototype = {
+util.inherits(PreviewPanel, Relay);
 
-    watch: function(){
+PreviewPanel.prototype.watch = function(){
 
 
-        this.fs.watch('projects/', function(){
+    this.fs.watch('projects/', function(){
 
-            this.socket.emit('update_files', {'updated': true});
-        }.bind(this));
-    }
+        this.runRelays('update_files', {'updated': true});
+    }.bind(this));
+
 };
 
 module.exports = PreviewPanel;
