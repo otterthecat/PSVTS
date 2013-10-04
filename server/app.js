@@ -25,7 +25,7 @@ io.sockets.on('connection', function(socket){
     var previewPanel = panels.getInstance('PreviewPanel', {
         'fs': deps.get('fs')
     });
-    previewPanel.addRelay(socket)
+    previewPanel.addRelay(socket);
     previewPanel.watch();
 
     var editor = new Editor(deps.get('fs'), deps.get('path'));
