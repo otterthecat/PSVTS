@@ -25,8 +25,8 @@ Editor.prototype.init = function(){
 
         var content = doc.content;
 
-        var stream = this.fs.createWriteStream(doc.path, {'flags': 'w'});
-        stream.write(content);
+        var writeStream = this.fs.createWriteStream(doc.path, {'flags': 'w'});
+        writeStream.write(content);
 
         this.runRelays('saved_doc', {saved: true});
     });
@@ -34,13 +34,15 @@ Editor.prototype.init = function(){
     this.on('get_file', function(fileData){
 
         var the_file = fileData.file;
-        this.fs.readFile(the_file, 'utf8', function(e, d){
+        var readStream = this.fs.createReadStream(the_file, {'flags': 'r'});
+        readStream.setEncoding('utf8');
+        readStream.on('data', function(chunk){
 
             this.runRelays('edit_file', {
               'file': the_file,
               'path': fileData.path,
               'mode': this.getMode.call(this, the_file),
-              'content': d
+              'content': chunk
             });
         }.bind(this));
     });
