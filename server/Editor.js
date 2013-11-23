@@ -1,11 +1,11 @@
 var Relay = require('./Relay');
-var util = require('util');
+var util  = require('util');
+var fs    = require('fs');
+var path  = require('path');
 
-var Editor = function(fs, path){
+var Editor = function(){
 
     Relay.call(this);
-    this.fs = fs;
-    this.path = path;
 
     this.modes = {
         'js': 'javascript',
@@ -25,7 +25,7 @@ Editor.prototype.init = function(){
 
         var content = doc.content;
 
-        var writeStream = this.fs.createWriteStream(doc.path, {'flags': 'w'});
+        var writeStream = fs.createWriteStream(doc.path, {'flags': 'w'});
         writeStream.write(content);
 
         this.runRelays('saved_doc', {saved: true});
@@ -34,7 +34,7 @@ Editor.prototype.init = function(){
     this.on('get_file', function(fileData){
 
         var the_file = fileData.file;
-        var readStream = this.fs.createReadStream(the_file, {'flags': 'r'});
+        var readStream = fs.createReadStream(the_file, {'flags': 'r'});
         readStream.setEncoding('utf8');
         readStream.on('data', function(chunk){
 
@@ -50,7 +50,7 @@ Editor.prototype.init = function(){
 
 Editor.prototype.getMode = function(fileName){
 
-    var extension = this.path.extname(fileName).substr(1);
+    var extension = path.extname(fileName).substr(1);
     return this.modes[extension];
 };
 

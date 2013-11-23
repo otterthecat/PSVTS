@@ -1,11 +1,10 @@
 var Relay = require('../Relay');
-var util = require('util');
+var util  = require('util');
+var fs    = require('fs');
 
-var PreviewPanel = function(opts){
+var PreviewPanel = function(){
 
     Relay.call(this);
-    this.fs = opts.fs;
-
 };
 
 util.inherits(PreviewPanel, Relay);
@@ -13,7 +12,7 @@ util.inherits(PreviewPanel, Relay);
 PreviewPanel.prototype.watch = function(){
 
 
-    this.fs.watch('projects/', function(){
+    fs.watch('projects/', function(){
 
         this.runRelays('update_files', {'updated': true});
     }.bind(this));

@@ -1,10 +1,10 @@
 var Relay = require('./Relay');
-var util = require('util');
+var util  = require('util');
+var cp    = require('child_process');
 
-var Terminal = function(cp){
+var Terminal = function(){
 
     Relay.call(this);
-    this.childProcess = cp;
     this.allowedCommands = {
         'ls': 'ls',
         'touch': 'touch',
@@ -42,15 +42,14 @@ Terminal.prototype.process = function(cmd){
 
     if(this.allowedCommands.hasOwnProperty(pCmd.cmd)) {
 
-        return this.childProcess.exec(pCmd.cmd + " " + pCmd.params, function(error, stdout, stderror){
+        return cp.exec(pCmd.cmd + " " + pCmd.params, function(error, stdout, stderror){
 
             // return call included for testing until better mocking solution
             return this.runRelays('terminal_return', {'out': stdout, 'error': stderror});
         }.bind(this));
     } else {
 
-        // return call included for testing until better mocking solution
-        return this.runRelays('terminal_return', {'out': 'null', 'error': 'command not allowed'});
+        return false;
     }
 };
 

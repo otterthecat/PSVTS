@@ -1,8 +1,9 @@
-var FilesPanel = function(settings){
+var path = require('path');
+var fs   = require('fs');
 
-    this.socket = settings.socket;
-    this.fs = settings.fs;
-    this.path = settings.path;
+var FilesPanel = function(socket){
+
+    this.socket = socket;
 
     this.socket.on('load_files', function(directory){
 
@@ -21,7 +22,6 @@ FilesPanel.prototype = {
     'loadFiles': function(params){
 
         var working_path = params.directory;
-        var fs = this.fs;
 
         // TODO - make this fully asyncrhonous!
         fs.readdir(working_path, function(error, files){
