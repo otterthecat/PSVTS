@@ -138,3 +138,6 @@ h2 {
 .CodeMirror {
   height: 100%;
 }
+.CodeMirror-gutters {
+  z-index: auto;
+}
